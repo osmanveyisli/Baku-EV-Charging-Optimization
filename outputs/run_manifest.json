@@ -1,0 +1,149 @@
+{
+  "analysis_date": "2026-07-12",
+  "generated_at_utc": "2026-07-12T13:21:09.331028+00:00",
+  "license_and_attribution": {
+    "openstreetmap": "© OpenStreetMap contributors; ODbL 1.0",
+    "natural_earth": "Natural Earth; public domain",
+    "official_boundaries": "Azerbaijan IDDA Open Data Portal; catalog declares Creative Commons Attribution",
+    "worldpop": "WorldPop 2026 R2025A; DOI 10.5258/SOTON/WP00839"
+  },
+  "sources": {
+    "districts": "Azerbaijan IDDA Open Data Portal; OSM relation IDs retained as crosswalk",
+    "chargers": "OpenStreetMap via Overpass API",
+    "candidate_pois": "OpenStreetMap via Overpass API",
+    "road_network": "OpenStreetMap Azerbaijan PBF distributed by Geofabrik; local PyOsmium extraction",
+    "land_mask": "Natural Earth 1:10m land"
+  },
+  "district_relations": [
+    {
+      "district": "Nərimanov",
+      "osm_id": 11827003
+    },
+    {
+      "district": "Nizami",
+      "osm_id": 11827201
+    },
+    {
+      "district": "Pirallahı",
+      "osm_id": 11827333
+    },
+    {
+      "district": "Qaradağ",
+      "osm_id": 11825937
+    },
+    {
+      "district": "Sabunçu",
+      "osm_id": 11827203
+    },
+    {
+      "district": "Səbail",
+      "osm_id": 11826940
+    },
+    {
+      "district": "Suraxanı",
+      "osm_id": 11827250
+    },
+    {
+      "district": "Xətai",
+      "osm_id": 11827202
+    },
+    {
+      "district": "Xəzər",
+      "osm_id": 11827332
+    },
+    {
+      "district": "Yasamal",
+      "osm_id": 11826939
+    },
+    {
+      "district": "Binəqədi",
+      "osm_id": 11825936
+    },
+    {
+      "district": "Nəsimi",
+      "osm_id": 11826962
+    }
+  ],
+  "input_counts": {
+    "districts": 12,
+    "chargers_inclusive": 18,
+    "candidate_pois": 3570,
+    "road_nodes": 441188,
+    "road_edges": 890146
+  },
+  "method_scope": "Static modeled driving times from OSM road classes/maxspeed; not live or congested travel times.",
+  "parameters": {
+    "grid_size_m": 750,
+    "road_network_buffer_m": 2500,
+    "maximum_grid_snap_m": 3000,
+    "grid_snap_speed_kph": 30,
+    "threshold_minutes": [
+      5,
+      10,
+      15
+    ],
+    "recommendation_count": 10,
+    "candidate_clusters": 50,
+    "candidate_search_radius_m": 7000,
+    "minimum_distance_from_existing_m": 600,
+    "minimum_selected_spacing_m": 1500,
+    "random_seed": 42
+  },
+  "population": {
+    "source": "WorldPop 2026 constrained 100 m R2025A v1",
+    "doi": "10.5258/SOTON/WP00839",
+    "estimated_population_in_grid": 2647408.2902907273,
+    "status": "calculated"
+  },
+  "optimization": {
+    "basis": "WorldPop population; lexicographic 15/10/5-minute maximum coverage",
+    "candidate_count": 70,
+    "selected_count": 10,
+    "solver_status_by_budget": {
+      "0": "baseline",
+      "1": "scipy_milp_status_0",
+      "2": "scipy_milp_status_0",
+      "3": "scipy_milp_status_0",
+      "4": "scipy_milp_status_0",
+      "5": "scipy_milp_status_0",
+      "6": "scipy_milp_status_0",
+      "7": "scipy_milp_status_0",
+      "8": "scipy_milp_status_0",
+      "9": "scipy_milp_status_0",
+      "10": "scipy_milp_status_0"
+    },
+    "selected_candidate_ids": [
+      "CAND-016",
+      "CAND-012",
+      "CAND-018",
+      "CAND-006",
+      "CAND-022",
+      "CAND-004",
+      "CAND-007",
+      "CAND-005",
+      "CAND-003",
+      "CAND-064"
+    ]
+  },
+  "package_versions": {
+    "folium": "0.20.0",
+    "geopandas": "1.1.4",
+    "matplotlib": "3.11.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.1",
+    "osmnx": "2.1.0",
+    "pandas": "3.0.3",
+    "rasterio": "1.5.0",
+    "reportlab": "5.0.0",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.0",
+    "shapely": "2.1.2"
+  },
+  "quality_checks": [
+    "5/10/15-minute coverage is monotonic in every scenario",
+    "recommended sites never increase a cell's nearest-station time",
+    "recommended-site geometries are unique",
+    "recommended sites satisfy the minimum spacing rule",
+    "analysis-grid geometries are non-empty and valid"
+  ]
+}

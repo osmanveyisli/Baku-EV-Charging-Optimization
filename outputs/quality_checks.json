@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checks": [
+    "5/10/15-minute coverage is monotonic in every scenario",
+    "recommended sites never increase a cell's nearest-station time",
+    "recommended-site geometries are unique",
+    "recommended sites satisfy the minimum spacing rule",
+    "analysis-grid geometries are non-empty and valid"
+  ],
+  "notes": [
+    "Optimization objective is WorldPop-weighted; land coverage is reported separately.",
+    "Driving times use static OpenStreetMap speeds and do not include live congestion.",
+    "Unknown-access OSM stations are included; explicitly private/no stations are excluded.",
+    "Recommended POIs require field, grid-capacity, land-control, safety, and permit review."
+  ]
+}
