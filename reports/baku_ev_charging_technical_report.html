@@ -1,0 +1,77 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Baku EV Charging Technical Report</title>
+<style>
+@page{size:A4;margin:16mm}body{font:10.5pt/1.45 Arial,sans-serif;color:#222;max-width:180mm;margin:0 auto}
+h1{color:#17365d;font-size:22pt;text-align:center;margin:20mm 0 8mm}h2{color:#17365d;font-size:15pt;break-before:page;margin-top:0}
+p{margin:0 0 3mm}table{border-collapse:collapse;width:100%;font-size:8.5pt;margin:4mm 0 7mm}th{background:#2b579a;color:white;text-align:left}
+th,td{border:.3pt solid #aaa;padding:2mm;vertical-align:top}tr:nth-child(even){background:#f3f6fa}figure{margin:5mm 0;text-align:center;break-inside:avoid}
+img{max-width:100%;max-height:115mm}figcaption{font-size:8pt;color:#666}a{color:#1f5a96}@media print{a{color:inherit;text-decoration:none}}
+</style></head><body><h1>Optimizing Public EV Charging Infrastructure in Baku</h1>
+<p><strong>Technical report — analysis snapshot 2026-07-12</strong></p>
+<h2>Executive summary</h2>
+<p>This study measures directed driving-network accessibility from a land-clipped 750 m grid to an inclusive OpenStreetMap EV-charger inventory, then uses a population-weighted maximum-coverage model to select 10 new screening-feasible host sites. The study combines official Azerbaijan district polygons, OpenStreetMap roads/chargers/POIs, Natural Earth land, and WorldPop 2026.</p>
+<p>• Baseline land coverage within 5/10/15 minutes: **3.9% / 16.3% / 33.3%**.</p>
+<p>• After land coverage within 5/10/15 minutes: **10.7% / 41.6% / 67.8%**.</p>
+<p>• Baseline population coverage within 5/10/15 minutes: **29.8% / 58.8% / 84.1%**.</p>
+<p>• After population coverage within 5/10/15 minutes: **36.1% / 76.7% / 99.2%**.</p>
+<p>Recommended coordinates are desktop planning shortlists, not construction approvals.</p>
+<h2>1. Study area and data</h2>
+<p>The study uses the 12 Baku district polygons from Azerbaijan&#x27;s official IDDA Open Data Portal, clipped to Natural Earth land. Existing chargers and candidate POIs come from dated Overpass responses; the road graph is a directed OSMnx extraction. WorldPop 2026 constrained 100 m population is aggregated to grid cells. OSM station access is inclusive: explicit private/no sites are excluded, while missing access tags remain unknown.</p>
+<h2>2. Method</h2>
+<p>Each clipped grid fragment is represented by a point snapped to the nearest driveable OSM node. A reverse multi-source Dijkstra gives every origin&#x27;s shortest directed time to a charger. Coverage is reported at 5, 10, and 15 minutes using both land area and WorldPop population as denominators. Candidate POIs near weighted K-means blind-spot clusters are evaluated with reverse cutoff Dijkstra. A binary SciPy/HiGHS model lexicographically maximizes population coverage at 15, then 10, then 5 minutes, subject to a 1500 m spacing rule.</p>
+<h2>3. District accessibility</h2>
+<table><thead><tr><th>District</th><th>Existing sites</th><th>Baseline population ≤15 min</th><th>After population ≤15 min</th><th>Uplift</th></tr></thead><tbody>
+<tr><td>Pirallahı</td><td>0</td><td>0.0%</td><td>88.0%</td><td>+88.0 pp</td></tr>
+<tr><td>Qaradağ</td><td>1</td><td>45.4%</td><td>96.3%</td><td>+50.9 pp</td></tr>
+<tr><td>Sabunçu</td><td>1</td><td>62.3%</td><td>99.9%</td><td>+37.5 pp</td></tr>
+<tr><td>Xəzər</td><td>2</td><td>65.7%</td><td>99.4%</td><td>+33.7 pp</td></tr>
+<tr><td>Suraxanı</td><td>0</td><td>83.5%</td><td>99.0%</td><td>+15.5 pp</td></tr>
+<tr><td>Binəqədi</td><td>5</td><td>89.4%</td><td>100.0%</td><td>+10.6 pp</td></tr>
+<tr><td>Yasamal</td><td>0</td><td>97.4%</td><td>97.4%</td><td>+0.0 pp</td></tr>
+<tr><td>Nizami</td><td>0</td><td>98.2%</td><td>98.2%</td><td>+0.0 pp</td></tr>
+<tr><td>Xətai</td><td>0</td><td>99.1%</td><td>99.9%</td><td>+0.8 pp</td></tr>
+<tr><td>Nərimanov</td><td>1</td><td>100.0%</td><td>100.0%</td><td>+0.0 pp</td></tr>
+<tr><td>Nəsimi</td><td>6</td><td>100.0%</td><td>100.0%</td><td>+0.0 pp</td></tr>
+<tr><td>Səbail</td><td>2</td><td>100.0%</td><td>100.0%</td><td>+0.0 pp</td></tr>
+</tbody></table>
+<figure><img src="../outputs/figures/district_accessibility.png" alt="District accessibility"><figcaption>District accessibility</figcaption></figure>
+<h2>4. Blind spots</h2>
+<table><thead><tr><th>Zone</th><th>Primary district</th><th>Area (km²)</th><th>Mean excess over 15 min</th></tr></thead><tbody>
+<tr><td>BLIND-001</td><td>Qaradağ</td><td>892.4</td><td>12.0</td></tr>
+<tr><td>BLIND-002</td><td>Xəzər</td><td>249.0</td><td>10.2</td></tr>
+<tr><td>BLIND-003</td><td>Sabunçu</td><td>93.9</td><td>2.6</td></tr>
+<tr><td>BLIND-004</td><td>Pirallahı</td><td>10.0</td><td>15.0</td></tr>
+<tr><td>BLIND-005</td><td>Pirallahı</td><td>8.0</td><td>15.0</td></tr>
+<tr><td>BLIND-006</td><td>Suraxanı</td><td>39.1</td><td>2.6</td></tr>
+<tr><td>BLIND-007</td><td>Binəqədi</td><td>11.3</td><td>4.6</td></tr>
+<tr><td>BLIND-008</td><td>Qaradağ</td><td>2.5</td><td>15.0</td></tr>
+<tr><td>BLIND-009</td><td>Xəzər</td><td>1.1</td><td>15.0</td></tr>
+<tr><td>BLIND-010</td><td>Qaradağ</td><td>3.9</td><td>3.3</td></tr>
+</tbody></table>
+<figure><img src="../outputs/figures/blind_spots_and_recommendations.png" alt="Blind spots and recommendations"><figcaption>Blind spots and recommendations</figcaption></figure>
+<h2>5. Recommended new charger locations</h2>
+<table><thead><tr><th>Rank</th><th>Site</th><th>Type</th><th>District</th><th>Latitude</th><th>Longitude</th><th>Newly covered population ≤15 min</th></tr></thead><tbody>
+<tr><td>1</td><td>Parkinq</td><td>parking</td><td>Sabunçu</td><td>40.554933</td><td>50.022826</td><td>153,314</td></tr>
+<tr><td>2</td><td>Parking</td><td>parking</td><td>Xəzər</td><td>40.435062</td><td>50.170398</td><td>52,887</td></tr>
+<tr><td>3</td><td>Azpetrol</td><td>fuel_station</td><td>Qaradağ</td><td>39.994466</td><td>49.430961</td><td>38,908</td></tr>
+<tr><td>4</td><td>Parking</td><td>parking</td><td>Suraxanı</td><td>40.369462</td><td>50.024419</td><td>37,958</td></tr>
+<tr><td>5</td><td>Goradil Stansiyası</td><td>transport_station</td><td>Binəqədi</td><td>40.552661</td><td>49.828083</td><td>35,883</td></tr>
+<tr><td>6</td><td>Gürgan İcra Nümayəndəliyi</td><td>townhall</td><td>Pirallahı</td><td>40.394784</td><td>50.338884</td><td>26,629</td></tr>
+<tr><td>7</td><td>Parking</td><td>parking</td><td>Qaradağ</td><td>40.327741</td><td>49.718090</td><td>18,072</td></tr>
+<tr><td>8</td><td>Parking</td><td>parking</td><td>Qaradağ</td><td>40.190137</td><td>49.428645</td><td>13,574</td></tr>
+<tr><td>9</td><td>Parking</td><td>parking</td><td>Qaradağ</td><td>40.374585</td><td>49.593097</td><td>12,240</td></tr>
+<tr><td>10</td><td>Oba Market</td><td>supermarket</td><td>Xəzər</td><td>40.365333</td><td>50.223042</td><td>10,333</td></tr>
+</tbody></table>
+<h2>6. Accessibility improvement</h2>
+<p>All after-values are recomputed as the minimum time to any existing or selected site, preventing overlap double-counting. With 10 new sites, population coverage within 15 minutes changes by <strong>+15.1 percentage points</strong> and land coverage changes by <strong>+34.5 points</strong>.</p>
+<figure><img src="../outputs/figures/coverage_before_after.png" alt="Coverage before and after"><figcaption>Coverage before and after</figcaption></figure>
+<figure><img src="../outputs/figures/scenario_curve.png" alt="Scenario curve"><figcaption>Scenario curve</figcaption></figure>
+<h2>7. Limitations</h2>
+<p>OSM stations may be incomplete, stale, duplicated, or missing access/connector/power metadata. Static OSM speeds do not measure Baku congestion. WorldPop is a modelled alpha population surface, not EV demand. Grid size and snapping introduce approximation. The optimization does not include uptime, queues, land tenure, electrical hosting capacity, costs, permits, safety, charging power, or connector compatibility. Each recommendation therefore requires operator verification and field, utility, commercial, and engineering review.</p>
+<h2>8. Sources and attribution</h2>
+<p>• [Azerbaijan IDDA Open Data Portal — Regions of Azerbaijan](https://opendata.az/en/@azerbaycan-respublikasinin-ekologiya-ve-tebii-servetler-nazirliyi/azerbaycanin-rayonlari)</p>
+<p>• [OpenStreetMap copyright and ODbL](https://www.openstreetmap.org/copyright) — © OpenStreetMap contributors</p>
+<p>• [WorldPop Azerbaijan 2026](https://hub.worldpop.org/geodata/summary?id=72400), DOI `10.5258/SOTON/WP00839`</p>
+<p>• [Natural Earth](https://www.naturalearthdata.com/)</p>
+<p>• [OSMnx documentation](https://osmnx.readthedocs.io/)</p>
+<p>• [SciPy MILP documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.milp.html)</p></body></html>

@@ -1,0 +1,16 @@
+folium==0.20.0
+geopandas==1.1.4
+jinja2==3.1.6
+matplotlib==3.11.0
+networkx==3.6.1
+numpy==2.5.1
+osmnx==2.1.0
+osmium==4.3.1
+pandas==3.0.3
+pyproj==3.7.2
+rasterio==1.5.0
+reportlab==5.0.0
+requests==2.34.2
+scikit-learn==1.9.0
+scipy==1.18.0
+shapely==2.1.2

@@ -1,0 +1,42 @@
+{
+  "project_title": "Optimizing Public EV Charging Infrastructure in Baku",
+  "analysis_date": "2026-07-12",
+  "local_crs": "EPSG:32639",
+  "grid_size_m": 750,
+  "minimum_cell_area_m2": 10000,
+  "road_network_buffer_m": 2500,
+  "maximum_grid_snap_m": 3000,
+  "grid_snap_speed_kph": 30,
+  "threshold_minutes": [5, 10, 15],
+  "recommendation_count": 10,
+  "candidate_clusters": 50,
+  "candidate_search_radius_m": 7000,
+  "maximum_candidate_pool": 70,
+  "minimum_distance_from_existing_m": 600,
+  "minimum_selected_spacing_m": 1500,
+  "random_seed": 42,
+  "nominatim_user_agent": "baku-ev-accessibility-research/1.0",
+  "overpass_endpoints": [
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "natural_earth_land_url": "https://naturalearth.s3.amazonaws.com/10m_physical/ne_10m_land.zip",
+  "official_boundaries_url": "https://admin.opendata.az/dataset/63ad644e-1d3d-4781-a107-be471c84c9cb/resource/dd1042ee-56b4-47a0-972c-fe1e68c24d6d/download/azrbaycan_rayonlar.geojson",
+  "worldpop_2026_url": "https://data.worldpop.org/GIS/Population/Global_2015_2030/R2025A/2026/AZE/v1/100m/constrained/aze_pop_2026_CN_100m_R2025A_v1.tif",
+  "worldpop_doi": "10.5258/SOTON/WP00839",
+  "geofabrik_pbf_url": "https://download.geofabrik.de/asia/azerbaijan-latest.osm.pbf",
+  "districts": [
+    {"name": "Binəqədi", "osm_relation_id": 11825936},
+    {"name": "Qaradağ", "osm_relation_id": 11825937},
+    {"name": "Xətai", "osm_relation_id": 11827202},
+    {"name": "Xəzər", "osm_relation_id": 11827332},
+    {"name": "Nərimanov", "osm_relation_id": 11827003},
+    {"name": "Nəsimi", "osm_relation_id": 11826962},
+    {"name": "Nizami", "osm_relation_id": 11827201},
+    {"name": "Pirallahı", "osm_relation_id": 11827333},
+    {"name": "Sabunçu", "osm_relation_id": 11827203},
+    {"name": "Səbail", "osm_relation_id": 11826940},
+    {"name": "Suraxanı", "osm_relation_id": 11827250},
+    {"name": "Yasamal", "osm_relation_id": 11826939}
+  ]
+}
